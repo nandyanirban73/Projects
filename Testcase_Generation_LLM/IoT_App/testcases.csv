@@ -1,0 +1,11 @@
+TestCaseID,Current Hour,Current Minute,Current Day,Current Month,Temperature (ÅEÅEC),Expected Output
+TC1,18,30,1,3,25.5,"Lights ON, AC ON, Fan OFF"
+TC2,4,0,3,5,8,"Lights ON, Heater ON, Fan OFF"
+TC3,5,1,4,7,22,"Lights OFF, AC OFF, Fan OFF"
+TC4,10,0,6,6,26,"Lights OFF, AC ON, Fan ON, Washing Machine Started"
+TC5,7,0,2,8,23.5,"Lights OFF, AC OFF, Fan OFF, Garden Watering Started"
+TC6,18,0,0,4,26,"Lights ON, AC ON, Fan ON"
+TC7,23,0,5,11,12,"Lights ON, AC OFF, Fan OFF"
+TC8,10,0,6,3,26,"Lights OFF, AC ON, Fan OFF, Washing Machine Started"
+TC9,6,0,1,4,9,"Lights OFF, Heater ON"
+TC10,7,0,6,6,15,"Lights OFF, AC OFF, Fan OFF, Garden Watering Started"
