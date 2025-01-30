@@ -36,10 +36,10 @@ for column in df_csv.columns:
 
 
 # Read a .py file
-py_file = "C:/Users/nandy/OneDrive/Documents/Visual_Studio_Workspace/Python_Workspace/Testcase_Generation_LLM/IoT_App/IoT_without_infi_loop.py"
+#py_file = "C:/Users/nandy/OneDrive/Documents/Visual_Studio_Workspace/Python_Workspace/Testcase_Generation_LLM/IoT_App/IoT_without_infi_loop.py"
 
-with open(py_file, "r") as file:
-    code_content = file.read()
+#with open(py_file, "r") as file:
+#    code_content = file.read()
 
 #print(code_content)
 
@@ -71,7 +71,7 @@ for _, row in df_xlsx.iterrows():
     # Create an entry for the dataset
     entry = {
         "requirement": requirement,
-        "code": code_content,  # Assuming the same code matches all requirements
+        #"code": code_content,  # Assuming the same code matches all requirements
         "test_cases": related_test_cases_data
     }
     
@@ -101,7 +101,7 @@ embeddings = []
 
 for entry in dataset:
     # Combine requirement, code, and test cases into a single string
-    combined_text = entry["requirement"] + " " + entry["code"]
+    combined_text = entry["requirement"]
     for test_case in entry["test_cases"]:
         combined_text += " " + " ".join(f"{key}: {value}" for key, value in test_case.items())
     
@@ -150,7 +150,7 @@ if ENABLE_MODEL_TRAINING :
         for entry in data:
             prompt = (
                 f"Requirement: {entry['requirement']}\n"
-                f"Code: {entry['code']}\n"
+                #f"Code: {entry['code']}\n"
                 #f"Test Cases: {', '.join(entry['test_cases'])}\n"
                 f"Test Cases: {entry['test_cases']}"
                 f"Output:"
@@ -299,7 +299,7 @@ def generate_output(query):
     return tokenizer.decode(outputs[0], skip_special_tokens=True)
 
 # Test the RAG pipeline
-query = "Update the requirement to - Lights will be ON at 4 pm between Nov to Feb month"
+query = "Write down the test cases when the temperature is 8°C. in night 11 pm and the month is December"
 result = generate_output(query)
 print("Generated Output:")
 print(result)

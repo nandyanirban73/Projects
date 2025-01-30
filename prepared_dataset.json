@@ -1,32 +1,131 @@
 [
     {
         "requirement": "Lights will be automatically on in the evening at 6 PM and automatically off in the morning at 5 AM.",
-        "code": "import datetime\nimport random\n\n# Simulated sensors and actuators\ndef get_current_temperature():\n    \"\"\"Simulate reading the current room temperature.\"\"\"\n    return random.uniform(5, 30)  # Random temperature between 5 and 30 degrees Celsius\n\ndef turn_on_light():\n    print(\"Lights turned ON.\")\n\ndef turn_off_light():\n    print(\"Lights turned OFF.\")\n\ndef turn_on_ac():\n    print(\"AC turned ON.\")\n\ndef turn_on_heater():\n    print(\"AC switched to Heater mode.\")\n\ndef turn_off_ac():\n    print(\"AC turned OFF.\")\n\ndef turn_on_fan():\n    print(\"Fan turned ON.\")\n\ndef turn_off_fan():\n    print(\"Fan turned OFF.\")\n\ndef start_washing_machine():\n    print(\"Washing machine started.\")\n\ndef water_garden():\n    print(\"Garden watering started.\")\n\n# Main automation logic\ndef home_automation_system():\n    now = datetime.datetime.now()\n    print(now)\n    current_hour = now.hour\n    current_minute = now.minute\n    current_day = now.weekday()  # 0 = Monday, 6 = Sunday\n    current_month = now.month\n\n    # Lights control\n    if 18 <= current_hour or current_hour < 5:  # Between 6 PM and 5 AM\n        turn_on_light()\n    else:\n        turn_off_light()\n\n    # Temperature control\n    current_temperature = get_current_temperature()\n    print(f\"Current Temperature : {current_temperature}\")\n    if current_temperature > 24:\n        turn_on_ac()\n        if 4 <= current_month <= 6:  # April to June\n            turn_on_fan()\n        else:\n            turn_off_fan()\n    elif current_temperature < 10:\n        turn_on_heater()\n    else:\n        turn_off_ac()\n        turn_off_fan()\n\n    # Washing machine control\n    if current_day == 6 and current_hour == 10 and current_minute == 0:  # Sunday at 10:00 AM\n        start_washing_machine()\n\n    # Garden watering control\n    if current_hour == 7 and current_minute == 0:  # Every day at 7:00 AM\n        water_garden()\n\nif __name__ == \"__main__\":\n    print(\"Executing Home IoT Automation System...\")\n    home_automation_system()\n",
-        "test_cases": []
+        "test_cases": [
+            {
+                "TestCaseID": "tc1",
+                "Current Hour": 18,
+                "Current Minute": 30,
+                "Current Day": 1,
+                "Current Month": 3,
+                "Temperature (\u0081E\u0081EC)": 25.5,
+                "Expected Output": "lights on, ac on, fan off"
+            },
+            {
+                "TestCaseID": "tc3",
+                "Current Hour": 5,
+                "Current Minute": 1,
+                "Current Day": 4,
+                "Current Month": 7,
+                "Temperature (\u0081E\u0081EC)": 22.0,
+                "Expected Output": "lights off, ac off, fan off"
+            }
+        ]
     },
     {
         "requirement": "AC will automatically turn ON when the room temperature is above 24\u00b0C.",
-        "code": "import datetime\nimport random\n\n# Simulated sensors and actuators\ndef get_current_temperature():\n    \"\"\"Simulate reading the current room temperature.\"\"\"\n    return random.uniform(5, 30)  # Random temperature between 5 and 30 degrees Celsius\n\ndef turn_on_light():\n    print(\"Lights turned ON.\")\n\ndef turn_off_light():\n    print(\"Lights turned OFF.\")\n\ndef turn_on_ac():\n    print(\"AC turned ON.\")\n\ndef turn_on_heater():\n    print(\"AC switched to Heater mode.\")\n\ndef turn_off_ac():\n    print(\"AC turned OFF.\")\n\ndef turn_on_fan():\n    print(\"Fan turned ON.\")\n\ndef turn_off_fan():\n    print(\"Fan turned OFF.\")\n\ndef start_washing_machine():\n    print(\"Washing machine started.\")\n\ndef water_garden():\n    print(\"Garden watering started.\")\n\n# Main automation logic\ndef home_automation_system():\n    now = datetime.datetime.now()\n    print(now)\n    current_hour = now.hour\n    current_minute = now.minute\n    current_day = now.weekday()  # 0 = Monday, 6 = Sunday\n    current_month = now.month\n\n    # Lights control\n    if 18 <= current_hour or current_hour < 5:  # Between 6 PM and 5 AM\n        turn_on_light()\n    else:\n        turn_off_light()\n\n    # Temperature control\n    current_temperature = get_current_temperature()\n    print(f\"Current Temperature : {current_temperature}\")\n    if current_temperature > 24:\n        turn_on_ac()\n        if 4 <= current_month <= 6:  # April to June\n            turn_on_fan()\n        else:\n            turn_off_fan()\n    elif current_temperature < 10:\n        turn_on_heater()\n    else:\n        turn_off_ac()\n        turn_off_fan()\n\n    # Washing machine control\n    if current_day == 6 and current_hour == 10 and current_minute == 0:  # Sunday at 10:00 AM\n        start_washing_machine()\n\n    # Garden watering control\n    if current_hour == 7 and current_minute == 0:  # Every day at 7:00 AM\n        water_garden()\n\nif __name__ == \"__main__\":\n    print(\"Executing Home IoT Automation System...\")\n    home_automation_system()\n",
-        "test_cases": []
+        "test_cases": [
+            {
+                "TestCaseID": "tc1",
+                "Current Hour": 18,
+                "Current Minute": 30,
+                "Current Day": 1,
+                "Current Month": 3,
+                "Temperature (\u0081E\u0081EC)": 25.5,
+                "Expected Output": "lights on, ac on, fan off"
+            },
+            {
+                "TestCaseID": "tc4",
+                "Current Hour": 10,
+                "Current Minute": 0,
+                "Current Day": 6,
+                "Current Month": 6,
+                "Temperature (\u0081E\u0081EC)": 26.0,
+                "Expected Output": "lights off, ac on, fan on, washing machine started"
+            }
+        ]
     },
     {
         "requirement": "AC will switch to heater mode when the temperature is below 10\u00b0C.",
-        "code": "import datetime\nimport random\n\n# Simulated sensors and actuators\ndef get_current_temperature():\n    \"\"\"Simulate reading the current room temperature.\"\"\"\n    return random.uniform(5, 30)  # Random temperature between 5 and 30 degrees Celsius\n\ndef turn_on_light():\n    print(\"Lights turned ON.\")\n\ndef turn_off_light():\n    print(\"Lights turned OFF.\")\n\ndef turn_on_ac():\n    print(\"AC turned ON.\")\n\ndef turn_on_heater():\n    print(\"AC switched to Heater mode.\")\n\ndef turn_off_ac():\n    print(\"AC turned OFF.\")\n\ndef turn_on_fan():\n    print(\"Fan turned ON.\")\n\ndef turn_off_fan():\n    print(\"Fan turned OFF.\")\n\ndef start_washing_machine():\n    print(\"Washing machine started.\")\n\ndef water_garden():\n    print(\"Garden watering started.\")\n\n# Main automation logic\ndef home_automation_system():\n    now = datetime.datetime.now()\n    print(now)\n    current_hour = now.hour\n    current_minute = now.minute\n    current_day = now.weekday()  # 0 = Monday, 6 = Sunday\n    current_month = now.month\n\n    # Lights control\n    if 18 <= current_hour or current_hour < 5:  # Between 6 PM and 5 AM\n        turn_on_light()\n    else:\n        turn_off_light()\n\n    # Temperature control\n    current_temperature = get_current_temperature()\n    print(f\"Current Temperature : {current_temperature}\")\n    if current_temperature > 24:\n        turn_on_ac()\n        if 4 <= current_month <= 6:  # April to June\n            turn_on_fan()\n        else:\n            turn_off_fan()\n    elif current_temperature < 10:\n        turn_on_heater()\n    else:\n        turn_off_ac()\n        turn_off_fan()\n\n    # Washing machine control\n    if current_day == 6 and current_hour == 10 and current_minute == 0:  # Sunday at 10:00 AM\n        start_washing_machine()\n\n    # Garden watering control\n    if current_hour == 7 and current_minute == 0:  # Every day at 7:00 AM\n        water_garden()\n\nif __name__ == \"__main__\":\n    print(\"Executing Home IoT Automation System...\")\n    home_automation_system()\n",
-        "test_cases": []
+        "test_cases": [
+            {
+                "TestCaseID": "tc2",
+                "Current Hour": 4,
+                "Current Minute": 0,
+                "Current Day": 3,
+                "Current Month": 5,
+                "Temperature (\u0081E\u0081EC)": 8.0,
+                "Expected Output": "lights on, heater on, fan off"
+            },
+            {
+                "TestCaseID": "tc9",
+                "Current Hour": 6,
+                "Current Minute": 0,
+                "Current Day": 1,
+                "Current Month": 4,
+                "Temperature (\u0081E\u0081EC)": 9.0,
+                "Expected Output": "lights off, heater on"
+            }
+        ]
     },
     {
         "requirement": "If the month is between April and June, turn on the fan along with the AC.",
-        "code": "import datetime\nimport random\n\n# Simulated sensors and actuators\ndef get_current_temperature():\n    \"\"\"Simulate reading the current room temperature.\"\"\"\n    return random.uniform(5, 30)  # Random temperature between 5 and 30 degrees Celsius\n\ndef turn_on_light():\n    print(\"Lights turned ON.\")\n\ndef turn_off_light():\n    print(\"Lights turned OFF.\")\n\ndef turn_on_ac():\n    print(\"AC turned ON.\")\n\ndef turn_on_heater():\n    print(\"AC switched to Heater mode.\")\n\ndef turn_off_ac():\n    print(\"AC turned OFF.\")\n\ndef turn_on_fan():\n    print(\"Fan turned ON.\")\n\ndef turn_off_fan():\n    print(\"Fan turned OFF.\")\n\ndef start_washing_machine():\n    print(\"Washing machine started.\")\n\ndef water_garden():\n    print(\"Garden watering started.\")\n\n# Main automation logic\ndef home_automation_system():\n    now = datetime.datetime.now()\n    print(now)\n    current_hour = now.hour\n    current_minute = now.minute\n    current_day = now.weekday()  # 0 = Monday, 6 = Sunday\n    current_month = now.month\n\n    # Lights control\n    if 18 <= current_hour or current_hour < 5:  # Between 6 PM and 5 AM\n        turn_on_light()\n    else:\n        turn_off_light()\n\n    # Temperature control\n    current_temperature = get_current_temperature()\n    print(f\"Current Temperature : {current_temperature}\")\n    if current_temperature > 24:\n        turn_on_ac()\n        if 4 <= current_month <= 6:  # April to June\n            turn_on_fan()\n        else:\n            turn_off_fan()\n    elif current_temperature < 10:\n        turn_on_heater()\n    else:\n        turn_off_ac()\n        turn_off_fan()\n\n    # Washing machine control\n    if current_day == 6 and current_hour == 10 and current_minute == 0:  # Sunday at 10:00 AM\n        start_washing_machine()\n\n    # Garden watering control\n    if current_hour == 7 and current_minute == 0:  # Every day at 7:00 AM\n        water_garden()\n\nif __name__ == \"__main__\":\n    print(\"Executing Home IoT Automation System...\")\n    home_automation_system()\n",
-        "test_cases": []
+        "test_cases": [
+            {
+                "TestCaseID": "tc4",
+                "Current Hour": 10,
+                "Current Minute": 0,
+                "Current Day": 6,
+                "Current Month": 6,
+                "Temperature (\u0081E\u0081EC)": 26.0,
+                "Expected Output": "lights off, ac on, fan on, washing machine started"
+            },
+            {
+                "TestCaseID": "tc6",
+                "Current Hour": 18,
+                "Current Minute": 0,
+                "Current Day": 0,
+                "Current Month": 4,
+                "Temperature (\u0081E\u0081EC)": 26.0,
+                "Expected Output": "lights on, ac on, fan on"
+            }
+        ]
     },
     {
         "requirement": "Washing machine will automatically turn on every Sunday morning at 10 AM.",
-        "code": "import datetime\nimport random\n\n# Simulated sensors and actuators\ndef get_current_temperature():\n    \"\"\"Simulate reading the current room temperature.\"\"\"\n    return random.uniform(5, 30)  # Random temperature between 5 and 30 degrees Celsius\n\ndef turn_on_light():\n    print(\"Lights turned ON.\")\n\ndef turn_off_light():\n    print(\"Lights turned OFF.\")\n\ndef turn_on_ac():\n    print(\"AC turned ON.\")\n\ndef turn_on_heater():\n    print(\"AC switched to Heater mode.\")\n\ndef turn_off_ac():\n    print(\"AC turned OFF.\")\n\ndef turn_on_fan():\n    print(\"Fan turned ON.\")\n\ndef turn_off_fan():\n    print(\"Fan turned OFF.\")\n\ndef start_washing_machine():\n    print(\"Washing machine started.\")\n\ndef water_garden():\n    print(\"Garden watering started.\")\n\n# Main automation logic\ndef home_automation_system():\n    now = datetime.datetime.now()\n    print(now)\n    current_hour = now.hour\n    current_minute = now.minute\n    current_day = now.weekday()  # 0 = Monday, 6 = Sunday\n    current_month = now.month\n\n    # Lights control\n    if 18 <= current_hour or current_hour < 5:  # Between 6 PM and 5 AM\n        turn_on_light()\n    else:\n        turn_off_light()\n\n    # Temperature control\n    current_temperature = get_current_temperature()\n    print(f\"Current Temperature : {current_temperature}\")\n    if current_temperature > 24:\n        turn_on_ac()\n        if 4 <= current_month <= 6:  # April to June\n            turn_on_fan()\n        else:\n            turn_off_fan()\n    elif current_temperature < 10:\n        turn_on_heater()\n    else:\n        turn_off_ac()\n        turn_off_fan()\n\n    # Washing machine control\n    if current_day == 6 and current_hour == 10 and current_minute == 0:  # Sunday at 10:00 AM\n        start_washing_machine()\n\n    # Garden watering control\n    if current_hour == 7 and current_minute == 0:  # Every day at 7:00 AM\n        water_garden()\n\nif __name__ == \"__main__\":\n    print(\"Executing Home IoT Automation System...\")\n    home_automation_system()\n",
-        "test_cases": []
+        "test_cases": [
+            {
+                "TestCaseID": "tc4",
+                "Current Hour": 10,
+                "Current Minute": 0,
+                "Current Day": 6,
+                "Current Month": 6,
+                "Temperature (\u0081E\u0081EC)": 26.0,
+                "Expected Output": "lights off, ac on, fan on, washing machine started"
+            },
+            {
+                "TestCaseID": "tc8",
+                "Current Hour": 10,
+                "Current Minute": 0,
+                "Current Day": 6,
+                "Current Month": 3,
+                "Temperature (\u0081E\u0081EC)": 26.0,
+                "Expected Output": "lights off, ac on, fan off, washing machine started"
+            }
+        ]
     },
     {
         "requirement": "Water supply to the garden will start automatically every day at 7 AM.",
-        "code": "import datetime\nimport random\n\n# Simulated sensors and actuators\ndef get_current_temperature():\n    \"\"\"Simulate reading the current room temperature.\"\"\"\n    return random.uniform(5, 30)  # Random temperature between 5 and 30 degrees Celsius\n\ndef turn_on_light():\n    print(\"Lights turned ON.\")\n\ndef turn_off_light():\n    print(\"Lights turned OFF.\")\n\ndef turn_on_ac():\n    print(\"AC turned ON.\")\n\ndef turn_on_heater():\n    print(\"AC switched to Heater mode.\")\n\ndef turn_off_ac():\n    print(\"AC turned OFF.\")\n\ndef turn_on_fan():\n    print(\"Fan turned ON.\")\n\ndef turn_off_fan():\n    print(\"Fan turned OFF.\")\n\ndef start_washing_machine():\n    print(\"Washing machine started.\")\n\ndef water_garden():\n    print(\"Garden watering started.\")\n\n# Main automation logic\ndef home_automation_system():\n    now = datetime.datetime.now()\n    print(now)\n    current_hour = now.hour\n    current_minute = now.minute\n    current_day = now.weekday()  # 0 = Monday, 6 = Sunday\n    current_month = now.month\n\n    # Lights control\n    if 18 <= current_hour or current_hour < 5:  # Between 6 PM and 5 AM\n        turn_on_light()\n    else:\n        turn_off_light()\n\n    # Temperature control\n    current_temperature = get_current_temperature()\n    print(f\"Current Temperature : {current_temperature}\")\n    if current_temperature > 24:\n        turn_on_ac()\n        if 4 <= current_month <= 6:  # April to June\n            turn_on_fan()\n        else:\n            turn_off_fan()\n    elif current_temperature < 10:\n        turn_on_heater()\n    else:\n        turn_off_ac()\n        turn_off_fan()\n\n    # Washing machine control\n    if current_day == 6 and current_hour == 10 and current_minute == 0:  # Sunday at 10:00 AM\n        start_washing_machine()\n\n    # Garden watering control\n    if current_hour == 7 and current_minute == 0:  # Every day at 7:00 AM\n        water_garden()\n\nif __name__ == \"__main__\":\n    print(\"Executing Home IoT Automation System...\")\n    home_automation_system()\n",
-        "test_cases": []
+        "test_cases": [
+            {
+                "TestCaseID": "tc5",
+                "Current Hour": 7,
+                "Current Minute": 0,
+                "Current Day": 2,
+                "Current Month": 8,
+                "Temperature (\u0081E\u0081EC)": 23.5,
+                "Expected Output": "lights off, ac off, fan off, garden watering started"
+            }
+        ]
     }
 ]
